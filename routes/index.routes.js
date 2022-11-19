@@ -4,7 +4,8 @@ const router = express.Router();
 /* GET home page */
 router.get("/", (req, res, next) => {
   res.render("index", {
-    layout: "startpage"
+    layout: "startpage",
+    isIndex: true
   });
 });
 

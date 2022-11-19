@@ -17,7 +17,10 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 // GET /auth/signup
 router.get("/signup", isLoggedOut, (req, res) => {
-  res.render("auth/signup");
+  res.render("auth/signup", {
+    layout: "startpage",
+    isSignup: true
+  });
 });
 
 // POST /auth/signup
@@ -60,7 +63,7 @@ router.post("/signup", isLoggedOut, async (req, res, next) => {
     req.session.user = user;
     req.session.isAuthenticated = true;
 
-    res.redirect("/");
+    res.redirect("/dashboard");
 
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
@@ -79,15 +82,18 @@ router.post("/signup", isLoggedOut, async (req, res, next) => {
 
 // GET /auth/login
 router.get("/login", isLoggedOut, (req, res) => {
-  res.render("auth/login");
+  res.render("auth/login", {
+    layout: "startpage",
+    isLogin: true
+  });
 });
 
 // POST /auth/login
 router.post("/login", isLoggedOut, async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  if (email === "" || password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, email and password.",
@@ -105,7 +111,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
   }
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
     const validated = bcrypt.compareSync(password, user.passwordHash);
 
     if (validated) {
@@ -113,16 +119,15 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
       // Remove the password field
       delete req.session.user.password;
 
-      res.redirect("/");
+      res.redirect("/dashboard");
     } else {
       console.log("wrong password");
       req.session.user = user.toObject();
       // Remove the password field
       delete req.session.user.password;
 
-      res.status(400)
-        .render("auth/login", { errorMessage: "Wrong credentials." });
-      res.redirect("/");
+      res.status(400).render("auth/login", { errorMessage: "Wrong credentials." });
+      // res.redirect("/");
     }
   } catch (err) {
     next(err);

@@ -1,24 +1,30 @@
 <div id="form">
-  <h2>Sign Up</h2>
+  <div class="mb-3">
+    <h2>Sign Up</h2>
+  </div>
   <form action="/auth/signup" method="POST">
 
-    <label> Username
-      <input type="text" name="username" placeholder="Your username"/>
-    </label>
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-person"></i></span>
+      <input type="text" name="username" class="form-control" placeholder="Your name" />
+    </div>
 
-    <label> Email
-      <input type="email" name="email" placeholder="Your email"/>
-    </label>
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+      <input type="email" name="email" class="form-control" placeholder="Your email" />
+    </div>
 
-    <label> Password
-      <input type="password" name="password" placeholder="Your password"/>
-    </label>
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-asterisk"></i></span>
+      <input type="password" name="password" class="form-control" placeholder="Your password" />
+    </div>
 
-    <button type="submit">Sign Up</button>
-
+    <div class="mb-3"><button type="submit" class="btn btn-lg">Continue</button></div>
 
     {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
+      <div class="mb-3">
+        <p class="error">{{errorMessage}}</p>
+      </div>
     {{/if}}
   </form>
 </div>
