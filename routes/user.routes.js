@@ -21,7 +21,7 @@ router.get("/:username/profile", async (req, res, next) => {
       firstName,
       lastName,
       userpic,
-      address: { street, houseNr, city, zipCode, contry },
+      address: { street, houseNr, city, zipCode, country },
     },
   } = user;
 
@@ -32,17 +32,18 @@ router.get("/:username/profile", async (req, res, next) => {
       firstName,
       lastName,
       userpic,
-      address: { street, houseNr, city, zipCode, contry },
+      address: { street, houseNr, city, zipCode, country },
     },
   });
 });
 
 router.post("/:username/profile", async (req, res, next) => {
-  const { email, firstName, lastName, userpic, street, houseNr, city, zipCode, contry } = req.body;
+  const { username } = req.params;
+  const { email, firstName, lastName, userpic, street, houseNr, city, zipCode, country } = req.body;
 
   try {
-    const user = await User.findOneAndUpdate(
-      { username: req.session.user.username },
+    req.session.user = await User.findOneAndUpdate(
+      { username },
       {
         email,
         profile: {
@@ -54,7 +55,7 @@ router.post("/:username/profile", async (req, res, next) => {
             houseNr,
             city,
             zipCode,
-            contry,
+            country,
           },
         },
       },
@@ -62,7 +63,7 @@ router.post("/:username/profile", async (req, res, next) => {
         new: true,
       }
     );
-    req.session.user = user;
+
     res.status(201).redirect("back");
   } catch (err) {
     next(err);
