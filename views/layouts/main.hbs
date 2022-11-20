@@ -1,7 +1,15 @@
 {{>_header}}
 
-{{>_navbar}}
 
-{{{body}}}
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class="px-3">
+    {{>_navbar}}
+
+    {{{body}}}
+
+  </div>
+  
+  {{>_basement}}
+</div>
 
 {{>_footer}}

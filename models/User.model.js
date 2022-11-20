@@ -20,6 +20,19 @@ const userSchema = new Schema(
       type: String,
       required: [true, "password is required"],
     },
+    profile: {
+      firstName: String,
+      lastName: String,
+      bio: String,
+      userpic: String,
+      address: {
+        street: String,
+        houseNr: String,
+        city: String,
+        zipCode: String,
+        country: String,
+      },
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

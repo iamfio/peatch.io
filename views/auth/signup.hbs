@@ -1,12 +1,12 @@
-<div id="form">
+<div class="signup-container">
   <div class="mb-3">
     <h2>Sign Up</h2>
   </div>
-  <form action="/auth/signup" method="POST">
+  <form action="/signup" method="POST">
 
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="bi bi-person"></i></span>
-      <input type="text" name="username" class="form-control" placeholder="Your name" />
+      <input type="text" name="username" class="form-control" placeholder="Your username" />
     </div>
 
     <div class="input-group mb-3">
@@ -23,7 +23,7 @@
 
     {{#if errorMessage}}
       <div class="mb-3">
-        <p class="error">{{errorMessage}}</p>
+        <div class="alert alert-danger">{{errorMessage}}</div>
       </div>
     {{/if}}
   </form>

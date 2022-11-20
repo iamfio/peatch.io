@@ -5,7 +5,8 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   res.render("index", {
     layout: "startpage",
-    isIndex: true
+    isIndex: true,
+    user: req.session.user
   });
 });
 

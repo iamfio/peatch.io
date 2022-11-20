@@ -1,5 +1,10 @@
-<h2>User dashboard</h2>
+<h1>Dashboard</h1>
+
 
 <p>
-  Welcome, {{user.username}}
+  Welcome, {{session.user.username}}
+</p>
+
+<p>
+  <a href="/{{user.username}}/profile">Create your profile</a>
 </p>
