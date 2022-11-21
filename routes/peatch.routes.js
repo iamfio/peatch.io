@@ -1,4 +1,4 @@
-const Peatch = require("../models/Peatch.models");
+const Peatch = require("../models/Peatch.model");
 const User = require("../models/User.model");
 
 const router = require("express").Router();
