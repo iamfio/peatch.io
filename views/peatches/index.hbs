@@ -1,1 +1,13 @@
 <h1>All Peatches</h1>
+
+{{#peaches}}
+  <h4>
+    <a href="/peatches/{{_id}}">{{topic}}</a>
+  </h4>
+  <div>
+    <p>
+      <cite>by: {{owner.username}}</cite>
+    </p>
+    <p>{{description}}</p>
+  </div>
+{{/peaches}}

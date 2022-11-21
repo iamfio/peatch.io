@@ -17,14 +17,6 @@ const favicon = require("serve-favicon");
 // https://www.npmjs.com/package/path
 const path = require("path");
 
-// ℹ️ Session middleware for authentication
-// https://www.npmjs.com/package/express-session
-const session = require("express-session");
-
-// ℹ️ MongoStore in order to save the user session in the database
-// https://www.npmjs.com/package/connect-mongo
-const MongoStore = require("connect-mongo");
-
 const handlebars = require("express-handlebars");
 
 // Middleware configuration
@@ -52,9 +44,10 @@ module.exports = (app) => {
   // Handles access to the public folder
   // app.use("/:username", express.static(path.join(__dirname, "..", "/public")))
   app.use(express.static(path.join(__dirname, "..", "/public")));
-  app.use("/:username/profile", express.static(path.join(__dirname, "..", "/public")))
-  app.use("/peatches", express.static(path.join(__dirname, "..", "/public")))
-  
+  app.use("/:username/profile", express.static(path.join(__dirname, "..", "/public")));
+  app.use("/peatches/:peatchId", express.static(path.join(__dirname, "..", "/public")));
+  app.use("/peatches", express.static(path.join(__dirname, "..", "/public")));
+
   // Handles access to the favicon
   app.use(favicon(path.join(__dirname, "..", "public", "images", "favicon.ico")));
 
