@@ -9,6 +9,7 @@ const { cloudinary, uploader } = require("../config/cloudinary");
 router.get("/:username", (req, res, next) => {
   res.render("user/dashboard", {
     user: req.session.user,
+    isDashboard: true
   });
 });
 
@@ -37,6 +38,7 @@ router.get("/:username/profile", async (req, res, next) => {
       userpicPath,
       address: { street, houseNr, city, zipCode, country },
     },
+    isProfile: true
   });
 });
 
@@ -46,8 +48,6 @@ router.post("/:username/profile", uploader.single("userpic"), async (req, res, n
   const userpic = req.file.originalname;
   const userpicPath = req.file.path;
   const userpicPublicId = req.file.filename;
-
-  cloudinary.image(userpic, { width: 300, height: 300, crop: "fill" });
 
   console.log(req.file);
   try {

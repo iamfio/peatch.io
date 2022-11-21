@@ -27,9 +27,6 @@ const MongoStore = require("connect-mongo");
 
 const handlebars = require("express-handlebars");
 
-// Connects the mongo uri to maintain the same naming structure
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/peatch-io";
-
 // Middleware configuration
 module.exports = (app) => {
   // In development environment the app logs
@@ -53,8 +50,10 @@ module.exports = (app) => {
   // Sets the view engine to handlebars
   app.set("view engine", "hbs");
   // Handles access to the public folder
-  app.use("/:username/profile", express.static(path.join(__dirname, "..", "/public")))
+  // app.use("/:username", express.static(path.join(__dirname, "..", "/public")))
   app.use(express.static(path.join(__dirname, "..", "/public")));
+  app.use("/:username/profile", express.static(path.join(__dirname, "..", "/public")))
+  app.use("/peatches", express.static(path.join(__dirname, "..", "/public")))
   
   // Handles access to the favicon
   app.use(favicon(path.join(__dirname, "..", "public", "images", "favicon.ico")));

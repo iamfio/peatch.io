@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
     username: {
@@ -35,6 +34,7 @@ const userSchema = new Schema(
         country: String,
       },
     },
+    peatches: [{ type: Schema.Types.ObjectId, ref: "Peatch" }],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

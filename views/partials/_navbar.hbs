@@ -6,28 +6,26 @@
       </a>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2">My Peatches</a></li>
-        <li><a href="/{{session.user.username}}" class="nav-link px-2">Dashboard</a></li>
+        {{#unless isDashboard}}
+          <li>
+            <a href="/{{session.user.username}}" class="nav-link px-2">Dashboard</a>
+          </li>
+        {{/unless}}
+        {{!-- <li><a href="/peatches" class="nav-link px-2">My Peatches</a></li> --}}
+        <li><a href="/peatches/new" class="nav-link px-2 {{#if isActive}}active{{/if}}">New Peatch</a></li>
       </ul>
 
       <div class="dropdown text-end">
-        <a
-          href="#"
-          class="d-block link-dark text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-            <img
-            {{#if session.user.profile.userpicPath}}
-              src="{{session.user.profile.userpicPath}}"
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <img 
+            {{#if session.user.profile.userpicPath}} 
+              src="{{session.user.profile.userpicPath}}" 
             {{else}}
-              src="https://picsum.photos/200"    
-            {{/if}}
-              alt="{{session.user.username}}'' userpic"
-              width="32"
-              height="32"
-              class="rounded-circle"
-            />
+              src="https://picsum.photos/200" 
+            {{/if}} 
+            alt="{{session.user.username}}'s userpic" width="32" height="32"
+            class="rounded-circle" />
         </a>
         <ul class="dropdown-menu text-small">
           <li><a class="dropdown-item" href="#">New Peach</a></li>

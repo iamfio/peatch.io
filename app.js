@@ -22,6 +22,7 @@ app.locals.appTitle = projectName;
 require("./config/session.config")(app);
 
 // 👇 Start handling routes here
+app.use("/peatches", isLoggedIn, require("./routes/peatch.routes"));
 app.use("/", require("./routes/index.routes"));
 app.use("/", require("./routes/auth.routes"));
 app.use("/", isLoggedIn, require("./routes/user.routes"));

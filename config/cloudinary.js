@@ -8,6 +8,8 @@ cloudinary.config({
   api_secret: process.env.CD_API_SECRET,
 });
 
+// cloudinary.image(userpic, { width: 300, height: 300, crop: "fill" });
+
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {

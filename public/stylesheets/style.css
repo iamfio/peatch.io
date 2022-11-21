@@ -76,12 +76,21 @@ body {
 .navbar-dashboard {
   /* background: linear-gradient(90deg, rgba(63, 21, 30, 0.925),  rgba(255, 194, 108, 0.938)); */
   background-color: var(--color-main-dark);
+  box-shadow: 0 2px 5px gray;
 }
 
 .navbar-dashboard a {
   color: rgba(255, 255, 255, 0.801);
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.navbar-dashboard a:hover {
+  color: #fff;
+}
+
+.dropdown a {
+  color: #000;
 }
 
 .userpic-profile {
