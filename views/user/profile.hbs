@@ -1,7 +1,17 @@
 <div>
   <h3 class="display-5">{{username}}'s Profile</h3>
 
-  <form action="/{{username}}/profile" method="POST">
+  {{#if session.user.profile.userpicPath}}
+    <div>
+      <img
+        class="img-thumbnail userpic-profile"
+        src="{{session.user.profile.userpicPath}}"
+        alt="{{username}}'s userpic"
+      />
+    </div> 
+  {{/if}}
+
+  <form action="/{{username}}/profile" method="POST" enctype="multipart/form-data">
 
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="bi bi-person"></i></span>
@@ -25,14 +35,26 @@
     </div>
 
     <div class="input-group mb-3">
-      <hr>
+      <hr />
     </div>
     <div class="input-group mb-3">
       <input type="text" name="street" class="form-control" placeholder="Street" value="{{profile.address.street}}" />
-      <input type="text" name="houseNr" class="form-control" placeholder="House Nr" value="{{profile.address.houseNr}}" />
+      <input
+        type="text"
+        name="houseNr"
+        class="form-control"
+        placeholder="House Nr"
+        value="{{profile.address.houseNr}}"
+      />
       <input type="text" name="city" class="form-control" placeholder="City" value="{{profile.address.city}}" />
       <input type="text" name="zipCode" class="form-control" placeholder="ZIP" value="{{profile.address.zipCode}}" />
-      <input type="text" name="country" class="form-control" placeholder="Country" value="{{profile.address.country}}" />
+      <input
+        type="text"
+        name="country"
+        class="form-control"
+        placeholder="Country"
+        value="{{profile.address.country}}"
+      />
     </div>
 
     <div class="mb-3"><button type="submit" class="btn btn-outline-primary">Update Profile</button></div>

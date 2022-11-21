@@ -25,6 +25,8 @@ const userSchema = new Schema(
       lastName: String,
       bio: String,
       userpic: String,
+      userpicPath: String,
+      userpicPublicId: String,
       address: {
         street: String,
         houseNr: String,

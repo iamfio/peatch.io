@@ -70,6 +70,12 @@ body {
   width: 155px;
 }
 
+.userpic-profile {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+}
+
 @media screen and (min-width: 990px) {
   .logo-peach {
     width: 55px;
