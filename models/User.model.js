@@ -19,6 +19,9 @@ const userSchema = new Schema(
       type: String,
       required: [true, "password is required"],
     },
+    isAdmin: {
+      type: Boolean,
+    },
     profile: {
       firstName: String,
       lastName: String,
@@ -34,6 +37,7 @@ const userSchema = new Schema(
         country: String,
       },
     },
+
     peatches: [{ type: Schema.Types.ObjectId, ref: "Peatch" }],
   },
   {

@@ -10,8 +10,18 @@ const peatchSchema = new Schema(
     description: {
       type: String,
     },
-    owner: { type: Schema.Types.ObjectId, ref: "User" },
-    members: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      unique: true,
+    },
+    members: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        unique: true,
+      },
+    ],
     proposals: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   {

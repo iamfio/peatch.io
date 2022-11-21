@@ -31,6 +31,7 @@
           <li><a class="dropdown-item" href="#">New Peach</a></li>
           {{! <li><a class="dropdown-item" href="#">Settings</a></li> }}
           <li><a class="dropdown-item" href="/{{session.user.username}}/profile">Profile</a></li>
+          {{#if session.user.isAdmin}}<li><a class="dropdown-item" href="/admin">Admin</a></li>{{/if}}
           <li>
             <hr class="dropdown-divider" />
           </li>

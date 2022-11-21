@@ -1,0 +1,10 @@
+<h1>Admin Dashboard</h1>
+
+{{#users}}
+  <div>
+    <a href="/{{username}}/profile">{{username}}</a> - {{email}}
+  </div>
+  <div>
+    {{firstName}} {{lastName}}
+  </div>
+{{/users}}
