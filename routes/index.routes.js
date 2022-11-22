@@ -1,7 +1,6 @@
 const { isAdmin } = require("../middleware");
-const User = require("../models/User.model");
-
 const router = require("express").Router();
+const User = require("../models/User.model");
 
 /* GET home page */
 router.get("/", (req, res, next) => {

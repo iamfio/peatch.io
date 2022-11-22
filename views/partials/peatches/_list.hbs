@@ -1,8 +1,29 @@
-{{!-- userpic --}}
-{{!-- proposal text --}}
-{{!-- checkbox isVoted --}}
-{{!-- ----- --}}
-{{!-- button Vote --}}
-<div>
-  
-</div>
+{{! userpic }}
+{{! proposal text }}
+{{! checkbox isVoted }}
+{{! ----- }}
+{{! button Vote }}
+<form action="/peatches/{{peatchId}}/vote" method="post">
+
+  {{#proposals}}
+    <div class="proposal-container py-2 px-2 mb-2 d-flex flex-row justify-content-between align-items-center">
+      <img 
+        src="{{creator.profile.userpicPath}}" 
+        alt="{{creator.username}}'s userpic" 
+        class="userpic-circle" 
+      />
+      <span class="proposal-text float-start">{{text}}</span>
+      <input 
+        type="checkbox" 
+        name="isVoted" 
+        {{#if isVoted}}checked{{/if}} 
+        value="{{isVoted}}" 
+        class="proposal-check" 
+      />
+    </div>
+  {{/proposals}}
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-outline-success">Vote</button>
+  </div>
+</form>

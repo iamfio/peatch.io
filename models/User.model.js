@@ -41,7 +41,6 @@ const userSchema = new Schema(
         country: String,
       },
     },
-
     peatches: [{ type: Schema.Types.ObjectId, ref: "Peatch" }],
   },
   {

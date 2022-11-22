@@ -114,14 +114,6 @@ ul {
   height: 30px;
 }
 
-.memberslist-peatches {
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center; */
-}
-
 .memberslist-member-chip {
   border-radius: 5px;
   box-shadow: 0 1px 2px gray;
@@ -137,6 +129,21 @@ ul {
   .logo-peach {
     width: 55px;
   }
+}
+
+/** Proposal List */
+.add-proposal-component-form {
+  width: 50%;
+}
+.proposal-container {
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 2px lightgray;
+  width: 50%;
+}
+
+.proposal-container:hover {
+  background-color: rgba(90, 30, 43, 0.24);
 }
 
 /** FOOTER */

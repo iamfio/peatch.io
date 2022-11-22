@@ -1,5 +1,5 @@
-const Peatch = require("../models/Peatch.model");
 const User = require("../models/User.model");
+const Peatch = require("../models/Peatch.model");
 
 const router = require("express").Router();
 
@@ -45,12 +45,36 @@ router.post("/new", async (req, res, next) => {
   }
 });
 
+router.post("/:peatchId/add", async (req, res, next) => {
+  const { peatchId } = req.params;
+  const { text } = req.body;
+
+  try {
+    await Peatch.findOneAndUpdate(
+      { _id: peatchId },
+      {
+        $push: {
+          proposals: {
+            text,
+            creator: req.session.user,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    res.redirect(`/peatches/${peatchId}`);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/:peatchId", async (req, res, next) => {
   const { peatchId } = req.params;
 
   try {
-    const { topic, description, owner, members } = await Peatch.findOne({ _id: peatchId })
-      .populate(["owner", "members"])
+    const { topic, description, owner, members, proposals } = await Peatch.findById({ _id: peatchId })
+      .populate(["owner", "members", "proposals", "proposals.creator"])
       .lean();
 
     res.render("peatches/peatch", {
@@ -59,6 +83,7 @@ router.get("/:peatchId", async (req, res, next) => {
       description,
       owner,
       members,
+      proposals,
     });
   } catch (err) {
     next(err);
@@ -92,8 +117,6 @@ router.post("/:peatchId/invite", async (req, res, next) => {
     next(err);
   }
 });
-
-router.post("/:peatchesId/add", async (req, res, next) => {});
 
 // Reject user from current Peatch
 router.post("/:peatchId/reject-user/:username", async (req, res, next) => {

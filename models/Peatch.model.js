@@ -24,9 +24,20 @@ const peatchSchema = new Schema(
     ],
     proposals: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Proposal"
-      }
+        text: {
+          type: String,
+          required: [true, "question text is required"],
+        },
+        isVoted: {
+          type: Boolean,
+          default: false,
+        },
+        votes: {
+          type: Number,
+          default: 0,
+        },
+        creator: { type: Schema.Types.ObjectId, ref: "User" },
+      },
     ],
   },
   {
