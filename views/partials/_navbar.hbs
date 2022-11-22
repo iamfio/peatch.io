@@ -19,11 +19,7 @@
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
           aria-expanded="false">
           <img 
-            {{#if session.user.profile.userpicPath}} 
-              src="{{session.user.profile.userpicPath}}" 
-            {{else}}
-              src="https://picsum.photos/200" 
-            {{/if}} 
+            src="{{session.user.profile.userpicPath}}" 
             alt="{{session.user.username}}'s userpic" width="32" height="32"
             class="rounded-circle" />
         </a>

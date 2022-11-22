@@ -1,4 +1,4 @@
-const isAdmin = require("../middleware/isAdmin");
+const { isAdmin } = require("../middleware");
 const User = require("../models/User.model");
 
 const router = require("express").Router();
@@ -17,10 +17,10 @@ router.get("/admin", isAdmin, async (req, res, next) => {
     const users = await User.find().lean();
 
     res.render("admin/index", {
-      users
+      users,
     });
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 

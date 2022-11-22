@@ -11,6 +11,7 @@ const proposalSchema = new Schema(
       type: Boolean,
     },
     votes: Number,
+    creator: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,

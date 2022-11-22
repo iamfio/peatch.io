@@ -3,14 +3,16 @@ const User = require("../models/User.model");
 
 const router = require("express").Router();
 
+const { isLoggedIn, isLoggedOut } = require("../middleware");
+
 router.get("/", async (req, res, next) => {
   try {
-    const peaches = await Peatch.find().populate("owner").lean();
+    const currentUser = req.session.user;
 
-    console.log(peaches);
+    const peatches = await Peatch.find().where({ members: currentUser._id }).populate(["owner", "members"]).lean();
 
     res.render("peatches/index", {
-      peaches,
+      peatches,
     });
   } catch (err) {
     next(err);
@@ -26,8 +28,6 @@ router.get("/new", (req, res) => {
 router.post("/new", async (req, res, next) => {
   const userId = req.session.user._id;
   const { topic, description } = req.body;
-
-  console.log({ topic, description, userId });
 
   try {
     const user = await User.findById({ _id: userId });
@@ -68,11 +68,8 @@ router.get("/:peatchId", async (req, res, next) => {
 router.get("/:peatchId/invite", async (req, res, next) => {
   const { peatchId } = req.params;
 
-  console.log("peatchID: ", peatchId);
-
   try {
     const peatch = await Peatch.findOne({ _id: peatchId });
-    console.log(peatch);
 
     res.render("peatches/invite", {
       peatchId,
@@ -90,12 +87,19 @@ router.post("/:peatchId/invite", async (req, res, next) => {
     const user = await User.findOne({ username });
     await Peatch.findByIdAndUpdate({ _id: peatchId }, { $push: { members: user } }, { new: true });
 
-    console.log(user);
-
     res.redirect(`/peatches/${peatchId}`);
   } catch (err) {
     next(err);
   }
+});
+
+router.post("/:peatchesId/add", async (req, res, next) => {});
+
+// Reject user from current Peatch
+router.post("/:peatchId/reject-user/:username", async (req, res, next) => {
+  const { peatchId, username } = req.params;
+
+  res.json({ message: "user successfully rejected from current peatch" });
 });
 
 module.exports = router;

@@ -22,7 +22,12 @@ const peatchSchema = new Schema(
         unique: true,
       },
     ],
-    proposals: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    proposals: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Proposal"
+      }
+    ],
   },
   {
     timestamps: true,

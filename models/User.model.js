@@ -28,7 +28,10 @@ const userSchema = new Schema(
       lastName: String,
       bio: String,
       userpic: String,
-      userpicPath: String,
+      userpicPath: {
+        type: String,
+        default: "https://picsum.photos/200/200?grayscale"
+      },
       userpicPublicId: String,
       address: {
         street: String,

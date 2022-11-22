@@ -9,10 +9,23 @@
   <a href="/peatches/{{peatchId}}/invite">Invite people</a>
 </div>
 
-<div>
-  <ul>
+<div class="memberslist-peatches d-flex flex-row justify-content-start align-items-center">
+  <ul class="list-inline">
     {{#members}}
-      <li>{{username}}</li>
+      <li class="memberslist-member-chip m-1 px-2 py-1 list-inline-item">
+        <img src="{{profile.userpicPath}}" alt="{{username}}'s userpic" class="userpic-circle"> 
+        <span class="text-dark px-1">{{username}}</span>
+      </li>
     {{/members}}
   </ul>
 </div>
+
+<div class="add-proposal-component">
+  {{>peatches/_add}}
+</div>
+
+{{!-- {{#if proposals}} --}}
+<div class="list-proposal-component">
+  {{>peatches/_list}}
+</div>
+{{!-- {{/if}} --}}
