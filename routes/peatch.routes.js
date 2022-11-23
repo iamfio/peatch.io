@@ -45,6 +45,21 @@ router.post("/new", async (req, res, next) => {
   }
 });
 
+router.post("/:peatchId/vote", async (req, res, next) => {
+  const { peatchId } = req.params;
+
+  try {
+    const peatch = await Peatch.findById({ _id: peatchId });
+    const proposals = peatch.proposals;
+
+    res.json({
+      proposals,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/:peatchId/add", async (req, res, next) => {
   const { peatchId } = req.params;
   const { text } = req.body;
@@ -94,8 +109,6 @@ router.get("/:peatchId/invite", async (req, res, next) => {
   const { peatchId } = req.params;
 
   try {
-    const peatch = await Peatch.findOne({ _id: peatchId });
-
     res.render("peatches/invite", {
       peatchId,
     });
@@ -110,9 +123,38 @@ router.post("/:peatchId/invite", async (req, res, next) => {
 
   try {
     const user = await User.findOne({ username });
-    await Peatch.findByIdAndUpdate({ _id: peatchId }, { $push: { members: user } }, { new: true });
 
-    res.redirect(`/peatches/${peatchId}`);
+    // TODO: check if user is already in peatch
+    // 1. lookup Peatch model if it contains "user"
+    // 2. if not, findByIdAndUpdate
+    // 3. else: errorMessage - user already in peatch
+
+    const peatch = await Peatch.findOne({ _id: peatchId }).populate("members");
+    const inMembers = peatch.members.find((member) => member.username === user.username);
+
+    if (inMembers?.username !== user?.username) {
+      peatch.update({ $push: { members: user } }).exec();
+      res.redirect(`/peatches/${peatchId}`);
+    } else {
+      res.render("peatches/invite", {
+        peatchId,
+        errorMessage: "User is already on the list",
+      });
+    }
+
+    // if (notInMembers) {
+    //   peatch.update({ $push: { members: user } }).exec();
+    //   res.redirect(`/peatches/${peatchId}`);
+    // } else {
+    //   console.log("user is already on the list");
+    // }
+
+    // await Peatch.findByIdAndUpdate(
+    //   { _id: peatchId },
+    //   { $push: { members: user } },
+    //   { new: true }
+    // );
+    // await Peatch.updateOne({_id: peatchId}, )
   } catch (err) {
     next(err);
   }

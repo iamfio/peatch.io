@@ -1,29 +1,25 @@
-{{! userpic }}
-{{! proposal text }}
-{{! checkbox isVoted }}
-{{! ----- }}
-{{! button Vote }}
 <form action="/peatches/{{peatchId}}/vote" method="post">
+  <div class="proposal-container mb-6 d-flex flex-column">
+    {{#proposals}}
+      <div class="proposal-list-item py-2 px-2 mb-2 d-flex flex-row justify-content-between align-items-center">
+        <img
+          src="{{creator.profile.userpicPath}}"
+          alt="{{creator.username}}'s userpic"
+          class="userpic-circle"
+        />
+        <span class="proposal-text">{{text}}</span>
+        <input
+          type="checkbox"
+          name="isVoted"
+          {{#if isVoted}}checked{{/if}}
+          value="{{isVoted}}"
+          class="proposal-check"
+        />
+      </div>
+    {{/proposals}}
 
-  {{#proposals}}
-    <div class="proposal-container py-2 px-2 mb-2 d-flex flex-row justify-content-between align-items-center">
-      <img 
-        src="{{creator.profile.userpicPath}}" 
-        alt="{{creator.username}}'s userpic" 
-        class="userpic-circle" 
-      />
-      <span class="proposal-text float-start">{{text}}</span>
-      <input 
-        type="checkbox" 
-        name="isVoted" 
-        {{#if isVoted}}checked{{/if}} 
-        value="{{isVoted}}" 
-        class="proposal-check" 
-      />
+    <div class="mt-3 ms-auto float-end justify-end">
+      <button type="submit" class="btn btn-outline-success">Vote</button>
     </div>
-  {{/proposals}}
-
-  <div class="mb-3">
-    <button type="submit" class="btn btn-outline-success">Vote</button>
   </div>
 </form>

@@ -22,9 +22,7 @@
     <div class="mb-3"><button type="submit" class="btn btn-lg">Continue</button></div>
 
     {{#if errorMessage}}
-      <div class="mb-3">
-        <div class="alert alert-danger">{{errorMessage}}</div>
-      </div>
+      {{>_flashError}}
     {{/if}}
   </form>
 </div>

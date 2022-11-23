@@ -69,9 +69,7 @@
     </div>
 
     {{#if errorMessage}}
-      <div class="mb-3">
-        <p class="error">{{errorMessage}}</p>
-      </div>
+      {{>_flashError}}
     {{/if}}
   </form>
 </div>

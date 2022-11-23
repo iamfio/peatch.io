@@ -27,16 +27,26 @@ const peatchSchema = new Schema(
         text: {
           type: String,
           required: [true, "question text is required"],
+          // unique: true,
         },
         isVoted: {
           type: Boolean,
           default: false,
         },
+        votedBy: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+          },
+        ],
         votes: {
           type: Number,
           default: 0,
         },
-        creator: { type: Schema.Types.ObjectId, ref: "User" },
+        creator: { 
+          type: Schema.Types.ObjectId, 
+          ref: "User" 
+        },
       },
     ],
   },

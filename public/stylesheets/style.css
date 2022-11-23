@@ -133,16 +133,26 @@ ul {
 
 /** Proposal List */
 .add-proposal-component-form {
-  width: 50%;
-}
-.proposal-container {
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 2px lightgray;
-  width: 50%;
+  /* width: 50%; */
 }
 
-.proposal-container:hover {
+.proposal-container {
+  
+}
+.card-component {
+  padding: 0.5rem;
+  box-shadow: 1px 2px 2px 1px lightgray;
+  border-radius: 5px;
+}
+
+.proposal-list-item {
+  /* min-width: 250px; */
+  border-radius: 5px;
+  background-color: rgb(255, 225, 225);
+  box-shadow: 0 2px 2px lightgray;
+}
+
+.proposal-list-item:hover {
   background-color: rgba(90, 30, 43, 0.24);
 }
 

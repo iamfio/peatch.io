@@ -1,29 +1,46 @@
-<h1>{{topic}}</h1>
-<h3>by: {{owner.username}}</h3>
+<div class="container">
+  <div class="row">
+    <h1>{{topic}}</h1>
+    <h3>by: {{owner.username}}</h3>
+    
+    <p>
+      {{description}}
+    </p>
+    
+    
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12 col-md-6 mb-4">
+      <div class="memberslist-peatches card-component d-flex flex-row justify-content-start align-items-center">
+        <ul class="list-inline">
+        <div class="mb-3">
+          <a href="/peatches/{{peatchId}}/invite" class="btn btn-outline-secondary">Invite people</a>
+        </div>
+        {{#members}}
+          <li class="memberslist-member-chip m-1 px-2 py-1 list-inline-item">
+            <img src="{{profile.userpicPath}}" alt="{{username}}'s userpic" class="userpic-circle">
+            <span class="text-dark px-1">{{username}}</span>
+          </li>
+        {{/members}}
+        </ul>
+      </div>
+    </div>
 
-<p>
-  {{description}}
-</p>
+    <div class="col-sm-12 col-md-6 mb-4">
+      <div class="card-component">
+        <div class="add-proposal-component">
+          {{>peatches/_add}}
+        </div>
+      
+        <div class="list-proposal-component">
+          {{>peatches/_list}}
+        </div>
+      </div>
+    </div>
 
-<div>
-  <a href="/peatches/{{peatchId}}/invite">Invite people</a>
-</div>
-
-<div class="memberslist-peatches d-flex flex-row justify-content-start align-items-center">
-  <ul class="list-inline">
-    {{#members}}
-      <li class="memberslist-member-chip m-1 px-2 py-1 list-inline-item">
-        <img src="{{profile.userpicPath}}" alt="{{username}}'s userpic" class="userpic-circle"> 
-        <span class="text-dark px-1">{{username}}</span>
-      </li>
-    {{/members}}
-  </ul>
-</div>
-
-<div class="add-proposal-component">
-  {{>peatches/_add}}
-</div>
-
-<div class="list-proposal-component">
-  {{>peatches/_list}}
+    
+    
+    
+  </div>
 </div>
