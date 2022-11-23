@@ -26,12 +26,10 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/new", async (req, res, next) => {
-  const userId = req.session.user._id;
   const { topic, description } = req.body;
+  const user = req.session.user;
 
   try {
-    const user = await User.findById({ _id: userId });
-
     const peatch = await Peatch.create({
       topic,
       description,
@@ -41,7 +39,8 @@ router.post("/new", async (req, res, next) => {
 
     res.redirect(`/peatches/${peatch.id}`);
   } catch (err) {
-    next(err);
+    // console.log(err.message)
+    next(err.message);
   }
 });
 
@@ -122,13 +121,20 @@ router.post("/:peatchId/invite", async (req, res, next) => {
   const { username } = req.body;
 
   try {
+    if (!username) {
+      res.render("peatches/invite", {
+        peatchId,
+        errorMessage: "please provide valid username",
+      });
+    }
     const user = await User.findOne({ username });
 
-    // TODO: check if user is already in peatch
-    // 1. lookup Peatch model if it contains "user"
-    // 2. if not, findByIdAndUpdate
-    // 3. else: errorMessage - user already in peatch
-
+    if (!user) {
+      res.render("peatches/invite", {
+        peatchId,
+        errorMessage: "user does not exist",
+      });
+    }
     const peatch = await Peatch.findOne({ _id: peatchId }).populate("members");
     const inMembers = peatch.members.find((member) => member.username === user.username);
 
@@ -141,20 +147,6 @@ router.post("/:peatchId/invite", async (req, res, next) => {
         errorMessage: "User is already on the list",
       });
     }
-
-    // if (notInMembers) {
-    //   peatch.update({ $push: { members: user } }).exec();
-    //   res.redirect(`/peatches/${peatchId}`);
-    // } else {
-    //   console.log("user is already on the list");
-    // }
-
-    // await Peatch.findByIdAndUpdate(
-    //   { _id: peatchId },
-    //   { $push: { members: user } },
-    //   { new: true }
-    // );
-    // await Peatch.updateOne({_id: peatchId}, )
   } catch (err) {
     next(err);
   }
