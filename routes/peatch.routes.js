@@ -58,18 +58,8 @@ router.post("/:peatchId/vote", async (req, res, next) => {
     ]);
     const proposals = peatch.proposals;
 
-    proposals.forEach((prop, i) => {
+    proposals.forEach((prop) => {
       const userIdsVotedForThisProposal = prop.votedBy.map((el) => el._id.toString());
-      // const proposalIdsUserVotedFor = user.votedFor.map((el) => el._id.toString())
-
-      // const userVotedProposal = user.votedFor.find((p) => p._id.toString());
-
-      // const hasVoted = prop.votedBy.some(p => {
-      //   if (p._id.toString() === userVotedProposal)
-      // })
-
-      // console.log("propVotedId: ", propVotedId);
-      // console.log("userVotedProposal ", userVotedProposal);
 
       if (votes?.includes(prop._id.toString())) {
         if (!userIdsVotedForThisProposal.includes(sessionUser._id)) {
@@ -181,7 +171,7 @@ router.post("/:peatchId/invite", async (req, res, next) => {
     const inMembers = peatch.members.find((member) => member.username === user.username);
 
     if (inMembers?.username !== user?.username) {
-      peatch.update({ $push: { members: user } }).exec();
+      peatch.updateOne({ $push: { members: user } }).exec();
       res.redirect(`/peatches/${peatchId}`);
     } else {
       res.render("peatches/invite", {

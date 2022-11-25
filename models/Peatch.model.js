@@ -27,7 +27,6 @@ const peatchSchema = new Schema(
         text: {
           type: String,
           required: [true, "question text is required"],
-          // unique: true,
         },
         isVoted: {
           type: Boolean,
@@ -37,7 +36,6 @@ const peatchSchema = new Schema(
           {
             type: Schema.Types.ObjectId,
             ref: "User",
-            // unique: true,
           },
         ],
         votes: {

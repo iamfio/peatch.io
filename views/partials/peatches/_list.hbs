@@ -1,17 +1,17 @@
 <form action="/peatches/{{peatchId}}/vote" method="post">
   <div class="proposal-container mb-6 d-flex flex-column">
     {{#proposals}}
-      <div class="proposal-list-item py-2 px-2 mb-2 d-flex flex-row justify-content-between align-items-center">
+      <div class="proposal-list-item py-2 px-3 mb-2 d-flex flex-row justify-content-between align-items-center">
         <img
           src="{{creator.profile.userpicPath}}"
           alt="{{creator.username}}'s userpic"
           class="userpic-circle"
         />
-        <span class="votes-count">
-          {{votedBy.length}}
-        </span>
         <span class="proposal-text">
           {{text}}
+        </span>
+        <span class="votes-count">
+          {{votedBy.length}}
         </span>
         <input
           type="checkbox"

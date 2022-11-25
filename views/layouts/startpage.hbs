@@ -8,14 +8,14 @@
         <nav class="nav nav-masthead justify-content-center float-md-end">
           {{#unless session.user}}
             <a class="nav-link fw-bold py-1 px-0 {{#if isIndex}}active{{/if}}" aria-current="page" href="/">Home</a>
-            <a class="nav-link fw-bold py-1 px-0 " href="#">Features</a>
+            {{!-- <a class="nav-link fw-bold py-1 px-0 " href="#">Features</a> --}}
             <a class="nav-link fw-bold py-1 px-0 {{#if isLogin}}active{{/if}}" href="/login">Log in</a>
             <a class="nav-link fw-bold py-1 px-0 {{#if isSignup}}active{{/if}}" href="/signup">
               <span class="link-signup">Sign up</span>
             </a>
           {{/unless}}
           {{#if session.user}}
-            <a class="nav-link fw-bold py-1 px-0 " href="/{{session.user.username}}">Dashboard</a>
+            <a class="nav-link fw-bold py-1 px-0 " href="/peatches">All Peatches</a>
           {{/if}}
         </nav>
       </div>
@@ -26,12 +26,12 @@
       {{{body}}}
 
     </main>
-
     <footer class="mt-auto text-white-50">
       <p>
         created with ❤️ by <a href="https://github.com/iamfio">@iamfio</a>
       </p>
     </footer>
+
   </div>
 </div>
 

@@ -8,7 +8,7 @@
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         {{#unless isDashboard}}
           <li>
-            <a href="/{{session.user.username}}" class="nav-link px-2">Dashboard</a>
+            {{!-- <a href="/{{session.user.username}}" class="nav-link px-2">Dashboard</a> --}}
           </li>
         {{/unless}}
         <li><a href="/peatches" class="nav-link px-2">My Peatches</a></li>
@@ -24,7 +24,7 @@
             class="rounded-circle" />
         </a>
         <ul class="dropdown-menu text-small">
-          <li><a class="dropdown-item" href="#">New Peach</a></li>
+          <li><a class="dropdown-item" href="/peatches/new"">New Peach</a></li>
           {{! <li><a class="dropdown-item" href="#">Settings</a></li> }}
           <li><a class="dropdown-item" href="/{{session.user.username}}/profile">Profile</a></li>
           {{#if session.user.isAdmin}}<li><a class="dropdown-item" href="/admin">Admin</a></li>{{/if}}

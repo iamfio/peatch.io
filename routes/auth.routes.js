@@ -130,7 +130,8 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
       // Remove the password field
       delete req.session.user.password;
 
-      return res.redirect(`/${user.username}`);
+      // return res.redirect(`/${user.username}`);
+      return res.redirect(`/peatches`);
     } else {
       console.log("wrong password");
       req.session.user = user.toObject();

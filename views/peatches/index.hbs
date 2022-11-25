@@ -1,13 +1,20 @@
-<h1>All Peatches</h1>
-
-{{#peatches}}
-  <h4>
-    <a href="/peatches/{{_id}}">{{topic}}</a>
-  </h4>
-  <div>
-    <p>
-      <cite>by: {{owner.username}}</cite>
-    </p>
-    <p>{{description}}</p>
-  </div>
-{{/peatches}}
+<div class="container">
+  {{#unless peatches}}
+    <h1>No peatches yet</h1>
+    <p>Feel free to create new one.</p>
+  {{else}}
+    <h1>All Peatches</h1>
+  {{/unless}}
+  
+  {{#peatches}}
+    <h4>
+      <a href="/peatches/{{_id}}">{{topic}}</a>
+    </h4>
+    <div>
+      <p>
+        <cite>by: {{owner.username}}</cite>
+      </p>
+      <p>{{description}}</p>
+    </div>
+  {{/peatches}}
+</div>
