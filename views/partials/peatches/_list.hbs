@@ -7,19 +7,24 @@
           alt="{{creator.username}}'s userpic"
           class="userpic-circle"
         />
-        <span class="proposal-text">{{text}}</span>
+        <span class="votes-count">
+          {{votedBy.length}}
+        </span>
+        <span class="proposal-text">
+          {{text}}
+        </span>
         <input
           type="checkbox"
-          name="isVoted"
-          {{#if isVoted}}checked{{/if}}
-          value="{{isVoted}}"
+          name="votes[]"
           class="proposal-check"
+          {{#if isVoted}}checked{{/if}}
+          value={{_id}}
         />
       </div>
     {{/proposals}}
 
     <div class="mt-3 ms-auto float-end justify-end">
-      <button type="submit" class="btn btn-outline-success">Vote</button>
+      <button type="submit" class="btn btn-outline-success btn-vote">Vote</button>
     </div>
   </div>
 </form>

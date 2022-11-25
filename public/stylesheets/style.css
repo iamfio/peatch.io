@@ -136,9 +136,6 @@ ul {
   /* width: 50%; */
 }
 
-.proposal-container {
-  
-}
 .card-component {
   padding: 0.5rem;
   box-shadow: 1px 2px 2px 1px lightgray;
@@ -146,7 +143,6 @@ ul {
 }
 
 .proposal-list-item {
-  /* min-width: 250px; */
   border-radius: 5px;
   background-color: rgb(255, 225, 225);
   box-shadow: 0 2px 2px lightgray;
@@ -159,4 +155,10 @@ ul {
 /** FOOTER */
 .basement {
   color: #5a1e2b;
+}
+
+
+/** UTILITY */
+.invisible {
+  display: none;
 }

@@ -1,9 +1,8 @@
-const User = require("../models/User.model");
-const Peatch = require("../models/Peatch.model");
-
 const router = require("express").Router();
 
-const { isLoggedIn, isLoggedOut } = require("../middleware");
+const User = require("../models/User.model");
+const Peatch = require("../models/Peatch.model");
+const mongoose = require("mongoose");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -37,31 +36,71 @@ router.post("/new", async (req, res, next) => {
       members: [user],
     });
 
+    await User.findByIdAndUpdate({ _id: user._id }, { $push: { peatches: peatch } });
+
     res.redirect(`/peatches/${peatch.id}`);
   } catch (err) {
-    // console.log(err.message)
     next(err.message);
   }
 });
 
 router.post("/:peatchId/vote", async (req, res, next) => {
   const { peatchId } = req.params;
+  const { votes } = req.body;
+  const sessionUser = req.session.user;
 
   try {
-    const peatch = await Peatch.findById({ _id: peatchId });
+    const user = await User.findById({ _id: sessionUser._id }).populate(["votedFor"]);
+    const peatch = await Peatch.findById({ _id: peatchId }).populate([
+      "proposals",
+      "proposals.votedBy",
+      "proposals._id",
+    ]);
     const proposals = peatch.proposals;
 
-    res.json({
-      proposals,
+    proposals.forEach((prop, i) => {
+      const userIdsVotedForThisProposal = prop.votedBy.map((el) => el._id.toString());
+      // const proposalIdsUserVotedFor = user.votedFor.map((el) => el._id.toString())
+
+      // const userVotedProposal = user.votedFor.find((p) => p._id.toString());
+
+      // const hasVoted = prop.votedBy.some(p => {
+      //   if (p._id.toString() === userVotedProposal)
+      // })
+
+      // console.log("propVotedId: ", propVotedId);
+      // console.log("userVotedProposal ", userVotedProposal);
+
+      if (votes?.includes(prop._id.toString())) {
+        if (!userIdsVotedForThisProposal.includes(sessionUser._id)) {
+          prop.votedBy.push(sessionUser);
+          user.votedFor.push(prop);
+        }
+      }
+
+      if (prop.votedBy.length > 0) {
+        prop.votes = prop.votedBy.length;
+      }
     });
+
+    user.save();
+    peatch.save();
+
+    res.redirect(`/peatches/${peatch.id}`);
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 });
 
 router.post("/:peatchId/add", async (req, res, next) => {
   const { peatchId } = req.params;
   const { text } = req.body;
+
+  if (text.length === 0) {
+    res.render("peatches/peatch", {
+      errorMessage: "please enter your proposal",
+    });
+  }
 
   try {
     await Peatch.findOneAndUpdate(
@@ -85,13 +124,16 @@ router.post("/:peatchId/add", async (req, res, next) => {
 
 router.get("/:peatchId", async (req, res, next) => {
   const { peatchId } = req.params;
+  const currentUser = req.session.user;
 
   try {
     const { topic, description, owner, members, proposals } = await Peatch.findById({ _id: peatchId })
+      // .populate(["owner", "members", ])
       .populate(["owner", "members", "proposals", "proposals.creator"])
       .lean();
 
     res.render("peatches/peatch", {
+      currentUser,
       peatchId,
       topic,
       description,

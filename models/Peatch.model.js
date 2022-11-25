@@ -13,7 +13,7 @@ const peatchSchema = new Schema(
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      unique: true,
+      unique: false,
     },
     members: [
       {
@@ -37,15 +37,16 @@ const peatchSchema = new Schema(
           {
             type: Schema.Types.ObjectId,
             ref: "User",
+            // unique: true,
           },
         ],
         votes: {
           type: Number,
           default: 0,
         },
-        creator: { 
-          type: Schema.Types.ObjectId, 
-          ref: "User" 
+        creator: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
         },
       },
     ],
@@ -54,5 +55,7 @@ const peatchSchema = new Schema(
     timestamps: true,
   }
 );
+
+peatchSchema.plugin(require("mongoose-beautiful-unique-validation"));
 
 module.exports = model("Peatch", peatchSchema);

@@ -2,11 +2,15 @@
   <div class="row">
     <h1>{{topic}}</h1>
     <h3>by: {{owner.username}}</h3>
+
+    
+    {{#if errorMessage}}
+      {{>_flashError}}
+    {{/if}}
     
     <p>
       {{description}}
     </p>
-    
     
   </div>
   
@@ -39,8 +43,5 @@
       </div>
     </div>
 
-    
-    
-    
   </div>
 </div>

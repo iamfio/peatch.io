@@ -30,7 +30,7 @@ const userSchema = new Schema(
       userpic: String,
       userpicPath: {
         type: String,
-        default: "https://picsum.photos/200/200?grayscale"
+        default: "https://picsum.photos/200/200?grayscale",
       },
       userpicPublicId: String,
       address: {
@@ -42,6 +42,7 @@ const userSchema = new Schema(
       },
     },
     peatches: [{ type: Schema.Types.ObjectId, ref: "Peatch" }],
+    votedFor: [{ type: Schema.Types.ObjectId, ref: "Peatch", unique: true }],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
@@ -49,6 +50,6 @@ const userSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+userSchema.plugin(require("mongoose-beautiful-unique-validation"));
 
-module.exports = User;
+module.exports = model("User", userSchema);
