@@ -1,20 +1,22 @@
 <div class="container">
-  {{#unless peatches}}
-    <h1>No peatches yet</h1>
-    <p>Feel free to create new one.</p>
-  {{else}}
-    <h1>All Peatches</h1>
-  {{/unless}}
-  
-  {{#peatches}}
-    <h4>
-      <a href="/peatches/{{_id}}">{{topic}}</a>
-    </h4>
-    <div>
-      <p>
-        <cite>by: {{owner.username}}</cite>
-      </p>
-      <p>{{description}}</p>
+  <div class="row">
+    <div class="col">
+      <div class="text-center mb-5">
+        {{#unless peatches}}
+          <h1>No peatches yet</h1>
+          <p>Feel free to create new one.</p>
+        {{else}}
+          <h1>All Peatches</h1>
+        {{/unless}}
+      </div>
     </div>
-  {{/peatches}}
+  </div>
+
+  <div class="row">
+    {{#peatches}}
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        {{>peatches/_peatchItem}}
+      </div>
+    {{/peatches}}
+  </div>
 </div>
